@@ -25,69 +25,6 @@ nav li {
     width: 100%;
 }
 
-nav li a {
-    display: block; 
-    width: 100%; 
-    padding: 20px; 
-    border-right: 5px solid; 
-    position: relative; 
-    z-index: 2;
-    text-decoration: none;
-    color: #444;
-    box-sizing: border-box; 
-    direction: rtl; 
-}
-
-nav li a:hover {
-    border-bottom: 0px; 
-    color: #fff;
-    direction: rtl; 
-}
-
-nav li:first-child a { 
-    border-right: 10px solid #3498db; 
-}
-nav li:nth-child(2) a { 
-    border-right: 10px solid #ffd071; 
-}
-nav li:nth-child(3) a { 
-    border-right: 10px solid #f0776c; 
-}
-nav li:last-child a { 
-    border-right: 10px solid #1abc9c; 
-}
-
-nav li a:after { 
-    content: "";
-    height: 100%; 
-    right: 0; 
-    top: 0; 
-    width: 0px;  
-    position: absolute; 
-    transition: all 0.3s ease 0s; 
-    z-index: -1;
-    direction: rtl; 
-
-}
-
-nav li a:hover:after { 
-    width: 100%; 
-    direction: rtl; 
-
-}
-nav li:first-child a:after { 
-    background: #3498db; 
-}
-nav li:nth-child(2) a:after { 
-    background: #ffd071; 
-}
-nav li:nth-child(3) a:after { 
-    background: #f0776c; 
-}
-nav li:last-child a:after { 
-    background: #1abc9c; 
-}
-
 @font-face {
     font-family: 'Lato';
     font-style: normal;
@@ -112,3 +49,70 @@ nav li:last-child a:after {
     font-weight: 700;
     src: local('Lato Bold'), local('Lato-Bold'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');
 }
+nav li button {
+    margin-right: 0;
+    display: block; 
+    width: 100%; 
+    padding: 20px; 
+    border-right: 5px solid; 
+    position: relative; 
+    z-index: 2;
+    text-decoration: none;
+    background-color: white;
+    color: #444;
+    border: none; 
+    cursor: pointer; 
+    box-sizing: border-box; 
+    direction: rtl; 
+    font-size: 20px;
+}
+
+nav li button:hover {
+    border-bottom: 0px; 
+    color: #fff;
+    direction: rtl; 
+}
+
+nav li:first-child button { 
+    border-right: 10px solid #d98f93; 
+}
+nav li:nth-child(2) button { 
+    border-right: 10px solid  rgba(2, 128, 144, 0.2); 
+
+}
+nav li:nth-child(3) button { 
+    border-right: 10px solid rgba(69, 105, 144, 0.15); 
+
+}
+/* nav li:last-child button { 
+    border-right: 10px solid #d98f93; 
+} */
+
+nav li button:after { 
+    content: "";
+    height: 100%; 
+    right: 0; 
+    top: 0; 
+    width: 0px;  
+    position: absolute; 
+    transition: all 0.3s ease 0s; 
+    z-index: -1;
+}
+
+nav li button:hover:after { 
+    width: 100%; 
+}
+nav li:first-child button:after { 
+    background:#d98f93; 
+}
+nav li:nth-child(2) button:after { 
+    background: rgba(2, 128, 144, 0.2);
+
+}
+nav li:nth-child(3) button:after { 
+    background: rgba(69, 105, 144, 0.15);
+
+}
+/* nav li:last-child button:after { 
+    background:#d98f93; 
+} */

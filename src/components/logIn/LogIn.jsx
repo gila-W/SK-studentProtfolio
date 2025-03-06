@@ -15,9 +15,10 @@ export const LogIn = () => {
     const isUser = users.find(
       (u) => u.userName == userName && u.password == password
     );
-    if (isUser) {
-      navigate("/home-page");
-    }
+    // if (isUser) {
+    //   navigate("/home-page");
+    // }
+    navigate("/home-page")
   };
   return (
     <div className="login">
