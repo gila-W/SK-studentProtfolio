@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Routing } from "../../utils/Routing ";
 import { useNavigate } from "react-router-dom";
@@ -5,7 +6,6 @@ import "./HomePage.css"
 
 export const HomePage = () => {
   const navigate = useNavigate();
-
   return (
     <nav>
       <ul>
@@ -26,3 +26,5 @@ export const HomePage = () => {
   );
   <Routing></Routing>;
 };
+
+
