@@ -1,12 +1,30 @@
 
 import React from "react";
+import { Routing } from "../../utils/Routing ";
+import { useNavigate } from "react-router-dom";
+import "./HomePage.css"
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   return (
-    <div style={{ width:"100%",backgroundColor: "red",height:"100%" }}>
-      home page
-    </div>
+    <nav>
+      <ul>
+        <li>
+          <a href="">מקבלי שרות/שמות הילדים</a>
+        </li>
+        <li>
+          <a href="">עובדים</a>
+        </li>
+        <li>
+          <a href="">עיריות</a>
+        </li>
+        <li>
+          <a href="">Contact</a>
+        </li>
+      </ul>
+    </nav>
   );
+  <Routing></Routing>;
 };
 
 
