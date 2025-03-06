@@ -1,6 +1,8 @@
 body {
-    background-color: #f45b69;
+    /* background-color: #d98f93; */
     font-family: "Asap", sans-serif;
+    background-color: rgba(177, 198, 201, 0.2);
+ 
   }
   
   .login {
@@ -73,13 +75,15 @@ body {
     margin-top: 10px;
     margin-left: -5px;
     border-radius: 5px;
-    background-color: #f45b69;
+    background-color: #d98f93;
     -webkit-transition: background-color 300ms;
     -moz-transition: background-color 300ms;
     transition: background-color 300ms;
   }
   .login > button:hover {
     background-color: #f24353;
+    filter: brightness(1.2); /* הבהרת הצבע ב-20% */
+
   }
   
   @-webkit-keyframes wawes {
