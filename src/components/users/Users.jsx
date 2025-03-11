@@ -1,6 +1,5 @@
 import React from 'react'
 import { useQuery } from "react-query"
-import { useState } from 'react';
 import db from '../../firebase';
 import {
     collection,
