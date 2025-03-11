@@ -1,3 +1,12 @@
 .div-utef{
     direction: rtl;
 }
+.date-input {
+    border: none !important; 
+    outline: none !important; 
+}
+.unique-select{
+    border: none; 
+    outline: none ;
+
+}

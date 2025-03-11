@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import './NewStudentProgressBar.css'
-import { Training } from '../training/Training';
-import { Accessbility } from '../accessbility/Accessbility';
-import { Audiology } from '../audiology/Audiology';
-import { StudentPersonalDetails } from '../studentPersonalDetails/StudentPersonalDetails';
-import { StudentEducationDetails } from '../studentEducation/StudentEducationDetails';
+import React, { useState } from "react";
+import "./NewStudentProgressBar.css";
+import { Training } from "../training/Training";
+import { Accessbility } from "../accessbility/Accessbility";
+import { Audiology } from "../audiology/Audiology";
+import { StudentPersonalDetails } from "../studentPersonalDetails/StudentPersonalDetails";
+import { StudentEducationDetails } from "../studentEducation/StudentEducationDetails";
+import { useNavigate ,Outlet} from "react-router-dom";
 
 export const NewStudentProgressBar = () => {
-  
+  const navigate = useNavigate();
+
   const [currentStep, setCurrentStep] = useState(0);
   const steps = [
     {
@@ -17,10 +19,17 @@ export const NewStudentProgressBar = () => {
     {
       title: "חינוך",
       component: StudentEducationDetails,
+      additionalComponents: [
+        {name:"פילוח שעות",nav:"StudentEducationSegmentationHours"},
+        {name:"הערכות לועדה",nav:"StudentEducationCommitteePreparing"},
+        {name:"מועדונית",nav:"StudentEducationClub"}
+      ],
     },
     {
       title: "אודיאולוגיה",
       component: Audiology,
+      additionalComponents: [
+      {name:"טיפולי דיבור",nav:"SpeechTherapist"}],
     },
     {
       title: "הנגשה",
@@ -29,7 +38,7 @@ export const NewStudentProgressBar = () => {
     {
       title: "הדרכה",
       component: Training,
-    }
+    },
   ];
 
   const nextStep = () => {
@@ -43,19 +52,43 @@ export const NewStudentProgressBar = () => {
   const CurrentComponent = steps[currentStep].component;
 
   return (
-    <form id="msform">
-      <ul id="progressbar">
-        {steps.map((step, index) => (
-          <li key={index} className={index === currentStep ? 'active' : ''}>{step.title}</li>
-        ))}
-      </ul>
-      <fieldset>
-        <h2 className="fs-title">{steps[currentStep].title}</h2>
-        <CurrentComponent />
-        <input type="button" name="קודם" className="previous action-button-previous" value="Previous" onClick={previousStep} disabled={currentStep === 0} />
-        <input type="button" name="הבא" className="next action-button" value="Next" onClick={nextStep} />
-      </fieldset>
-    </form>
+    <div className="new-student-progress-bar">
+      <div id="msform">
+        <ul id="progressbar">
+          {steps.map((step, index) => (
+            <li key={index} className={index === currentStep ? "active" : ""}>
+              {step.title}
+            </li>
+          ))}
+        </ul>
+        <fieldset>
+          <h2 className="fs-title">{steps[currentStep].title}</h2>
+          <section className="NewStudentProgressBar-section">
+            <CurrentComponent />
+            {steps[currentStep].additionalComponents&&
+              steps[currentStep].additionalComponents.map((additional)=><button onClick={()=>navigate(`${additional.nav}`)}>{additional.name}</button>)
+            }
+            <Outlet />
+
+            <input
+              type="button"
+              name="קודם"
+              className="previous action-button-previous"
+              value="Previous"
+              onClick={previousStep}
+              disabled={currentStep === 0}
+            />
+            <input
+              type="button"
+              name="הבא"
+              className="next action-button"
+              value="Next"
+              onClick={nextStep}
+            />
+
+          </section>{" "}
+        </fieldset>
+      </div>
+    </div>
   );
 };
-
