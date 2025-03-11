@@ -18,7 +18,6 @@ export const Routing = () => {
         <Route path="/employees" element={<Employees />}></Route>
         <Route path="/municipalities" element={<Municipalities />}></Route>
         <Route path="/students-details-list" element={<StudentsDetailsList />}></Route>
-
       </Routes>
     </div>
   );
