@@ -1,7 +1,11 @@
-import React from "react";
-import { useQuery } from "react-query";
-import db from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import React from 'react'
+import { useQuery } from "react-query"
+import db from '../../firebase';
+import {
+    collection,
+    getDocs,
+} from 'firebase/firestore';
+
 
 const fetchUsers = async () => {
   const querySnapshot = await getDocs(collection(db, "systemUsers"));
