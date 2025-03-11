@@ -2,7 +2,6 @@ import React from "react";
 import "./StudentPersonalDetails.css";
 
 export const StudentPersonalDetails = () => {
-    
   const fields = [
     { name: "firstName", placeholder: "שם פרטי", type: "text" },
     { name: "lastName", placeholder: "שם משפחה", type: "text" },
@@ -20,26 +19,54 @@ export const StudentPersonalDetails = () => {
     { name: "motherPhone", placeholder: "טלפון אמא", type: "text" },
     { name: "gender", placeholder: "מין", type: "text" },
     { name: "healthFund", placeholder: "קופת חולים", type: "text" },
-   
+    { name: "newspaper", placeholder: "עיתון/נופש", type: "checkbox" },
+    { name: "allowance", placeholder: "זכאי לביטוח לאומי?", type: "checkbox" },
   ];
+  const healthFund = ["מאוחדת", "מכבי", "כללית", "לאומית"];
 
   return (
     <div className="div-utef">
       <>
-        {fields.map((field, index) => (
-          <input
-          className="unique-input"
-            key={index}
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
-          />
-        ))}
+        {fields.map((field, index) => {
+          return field.name === "dateOfBirth" ? (
+            <div
+              className="unique-div"
+              style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+            >
+              <label>{field.placeholder}</label>
+              <input type={field.type} className="date-input" />{" "}
+            </div>
+          ) : field.name === "healthFund" ? (
+            <select className="unique-select" name={`${field.name}-right`}>
+              <option value="" disabled selected>
+                {field.placeholder}
+              </option>
+              {healthFund.map((option, optionIndex) => (
+                <option key={optionIndex} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          ) : field.name === "allowance" || field.name === "newspaper" ? (
+           
+            <div
+              className="unique-div"
+              style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+            >
+              <label>{field.placeholder}</label>
+              <input type={field.type} />
+            </div>
+          ) : (
+            <input
+              className="unique-input"
+              key={index}
+              type={field.type}
+              name={field.name}
+              placeholder={field.placeholder}
+            />
+          );
+        })}
       </>
-      <br></br>
-     <div className="unique-div"> עיתון/נופש <input type="checkbox" /></div>
-     <div className="unique-div">זכאות לביטוח לאומי? <input type="checkbox" /></div>
-      <br></br>
 
     </div>
   );

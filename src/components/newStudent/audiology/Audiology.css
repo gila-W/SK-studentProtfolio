@@ -1,12 +1,32 @@
-.date-input {
+/* .date-input {
     border: none !important; 
     outline: none !important; 
-}
+} */
 .div-utef{
     direction: rtl;
 }
 .unique-select{
     border: none; 
     outline: none ;
+}
+.unique-div label {
+    margin-right: 10px; /* או כל ערך אחר שתרצי */
+}
+.unique-div input {
+    margin-right: 10px; /* או כל ערך אחר שתרצי */
+}
 
+.date-input-container { 
+    height: 25px; /* שינוי הגובה */
+    display: flex; /* להבטיח שהאינפוט יתיישר בצורה נכונה */
+    align-items: center; /* למרכז את התוכן בתוך הדיב */
+    size: 10px;
+}
+
+.date-input {
+    border: none !important; 
+    outline: none !important; 
+}
+.left-right-table{
+    margin-right: 7.3vw;
 }
