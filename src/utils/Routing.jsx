@@ -20,7 +20,7 @@ export const Routing = () => {
         <Route path="/home-page" element={<HomePage />}></Route>
         <Route path="/student-details" element={<StudentDetails />}></Route>
         <Route
-          path="/new-student"
+          path="/add-student"
           element={
             <div className="row">
               <div className="col-md-6 col-md-offset-3">

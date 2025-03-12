@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NewStudentProgressBar.css";
 import { Training } from "../training/Training";
 import { Accessbility } from "../accessbility/Accessbility";
 import { Audiology } from "../audiology/Audiology";
 import { StudentPersonalDetails } from "../studentPersonalDetails/StudentPersonalDetails";
 import { StudentEducationDetails } from "../studentEducation/StudentEducationDetails";
-import { useNavigate ,Outlet} from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 
 export const NewStudentProgressBar = () => {
   const navigate = useNavigate();
-
+  const [isNestedOpen, setIsNestedOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const steps = [
     {
@@ -20,16 +20,15 @@ export const NewStudentProgressBar = () => {
       title: "חינוך",
       component: StudentEducationDetails,
       additionalComponents: [
-        {name:"פילוח שעות",nav:"StudentEducationSegmentationHours"},
-        {name:"הערכות לועדה",nav:"StudentEducationCommitteePreparing"},
-        {name:"מועדונית",nav:"StudentEducationClub"}
+        { name: "פילוח שעות", nav: "StudentEducationSegmentationHours" },
+        { name: "הערכות לועדה", nav: "StudentEducationCommitteePreparing" },
+        { name: "מועדונית", nav: "StudentEducationClub" },
       ],
     },
     {
       title: "אודיאולוגיה",
       component: Audiology,
-      additionalComponents: [
-      {name:"טיפולי דיבור",nav:"SpeechTherapist"}],
+      additionalComponents: [{ name: "טיפולי דיבור", nav: "SpeechTherapist" }],
     },
     {
       title: "הנגשה",
@@ -40,16 +39,19 @@ export const NewStudentProgressBar = () => {
       component: Training,
     },
   ];
-
+  const CurrentComponent = steps[currentStep].component;
   const nextStep = () => {
+    setIsNestedOpen(false);
     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
-
   const previousStep = () => {
+    setIsNestedOpen(false);
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
-
-  const CurrentComponent = steps[currentStep].component;
+  const handleNestedComponent = (nav) => {
+    setIsNestedOpen(true);
+    navigate(nav);
+  };
 
   return (
     <div className="new-student-progress-bar">
@@ -65,11 +67,13 @@ export const NewStudentProgressBar = () => {
           <h2 className="fs-title">{steps[currentStep].title}</h2>
           <section className="NewStudentProgressBar-section">
             <CurrentComponent />
-            {steps[currentStep].additionalComponents&&
-              steps[currentStep].additionalComponents.map((additional)=><button onClick={()=>navigate(`${additional.nav}`)}>{additional.name}</button>)
-            }
-            <Outlet />
-
+            {steps[currentStep].additionalComponents &&
+              steps[currentStep].additionalComponents.map((additional) => (
+                <button onClick={() => handleNestedComponent(additional.nav)}>
+                  {additional.name}
+                </button>
+              ))}
+            {isNestedOpen && <Outlet />}
             <input
               type="button"
               name="קודם"
@@ -85,8 +89,7 @@ export const NewStudentProgressBar = () => {
               value="Next"
               onClick={nextStep}
             />
-
-          </section>{" "}
+          </section>
         </fieldset>
       </div>
     </div>
