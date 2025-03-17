@@ -22,22 +22,22 @@ export const SpeechTherapist = () => {
         return (
           <div
             className="unique-div"
-            style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+            style={{ display: "inline-flex", direction: "rtl", gap: "30px", margin: "1.1%" }}
           >
             <label>{field.placeholder}</label>
             <input type={field.type} className="date-input" />{" "}
           </div>
         );
       })}
-      <HebrewCalendar />
       <div
         className="unique-div"
-        style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+        style={{ display: "inline-flex", direction: "rtl", gap: "30px" , margin: "1.1%"}}
       >
         <label>סיום טיפולים?</label>
         <input type="checkbox" className="date-input" />{" "}
         <input type="date" className="date-input" />{" "}
       </div>
+      <HebrewCalendar />
     </div>
   );
 };

@@ -1,0 +1,15 @@
+.code-input {
+  width: 50px;
+  height: 20px;
+}
+.unique-select {
+  border: none;
+  outline: none;
+}
+.unique-div {
+  height: 49px;
+}
+.date-input {
+  border: none !important;
+  outline: none !important;
+}

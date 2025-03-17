@@ -1,4 +1,7 @@
-.day-input{
-    font-size: 10px;
-    color: black;display: inline-flex;
+.calendar-container {
+    direction: rtl;
+    margin-right: 25vw; /* שינוי ערך זה לפי הצורך */
+}
+.date-num{
+    width: 350px;
 }
