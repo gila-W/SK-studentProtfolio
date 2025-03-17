@@ -6,23 +6,6 @@
     margin: 0;
     padding: 0;
 }
-/* 
-html {
-    height: 100%;
-    background: #6441A5; 
-    background: -webkit-linear-gradient(to left, #6441A5, #2a0845);
-}
-
-body {
-    
-    font-family: montserrat, arial, verdana;
-    background: transparent;
-} */
-/* .new-student-progress-bar html{
-    height: 100%;
-    background: #6441A5;
-    background: -webkit-linear-gradient(to left, #6441A5, #2a0845);
-} */
 
 .new-student-progress-bar body {
     font-family: montserrat, arial, verdana;
@@ -213,4 +196,15 @@ body {
     overflow: auto; 
     margin-left: 2px;
       
+}
+.outlet-button{
+    width: 100px;
+    background:  #d98f93;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
 }

@@ -67,13 +67,15 @@ export const NewStudentProgressBar = () => {
           <h2 className="fs-title">{steps[currentStep].title}</h2>
           <section className="NewStudentProgressBar-section">
             <CurrentComponent />
+            <br/>
             {steps[currentStep].additionalComponents &&
               steps[currentStep].additionalComponents.map((additional) => (
-                <button onClick={() => handleNestedComponent(additional.nav)}>
+                <button className="outlet-button" onClick={() => handleNestedComponent(additional.nav)}>
                   {additional.name}
                 </button>
               ))}
             {isNestedOpen && <Outlet />}
+            <br/>
             <input
               type="button"
               name="קודם"

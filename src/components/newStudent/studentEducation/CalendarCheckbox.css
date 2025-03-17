@@ -1,0 +1,20 @@
+.month-calendar-container {
+  background-color: #f5f5dc; /* צבע רקע */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.month-calendar-table {
+  width: 90%;
+  border-collapse: collapse;
+}
+
+.month-calendar-td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import moment from 'moment-hijri';
-import './MyCalender';
+import './MyCalender.css';
 
 export const HebrewCalendar = () => {
     const [date, setDate] = useState(new Date());
@@ -21,17 +21,17 @@ export const HebrewCalendar = () => {
         });
     };
 
-    const formattedDate = moment(date).format('iYYYY-iMM-iDD');
+    const formattedDate = moment(date).format('DD-MM-YYYY');
 
     return (
-        <div style={{ direction: 'rtl' }}>
+        <div className="calendar-container">
             <Calendar
                 onChange={handleDateChange}
                 value={date}
                 locale="he-IL" // להבטיח שהלוח שנה בעברית
             />
-            <div className='day-input'>
-                <h3> מס' התחייבות לתאריך: {formattedDate}</h3>
+            <div className='date-num'>
+                <h4> מס' התחייבות לתאריך: {formattedDate}</h4>
                 <input
                     type="text"
                     value={events[formattedDate] || ''}

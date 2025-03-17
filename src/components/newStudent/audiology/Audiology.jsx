@@ -121,7 +121,7 @@ export const Audiology = () => {
             height: "7vh",
             alignItems: "center",
             margin: "1.1%",
-          }; // הוספת מרווח
+          }; 
 
           if (field.name === "qualifyingHearingTest") {
             return (
