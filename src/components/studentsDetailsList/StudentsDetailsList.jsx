@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 export const StudentsDetailsList = () => {
     const navigate=useNavigate();
     const addStudent =()=>{
-        navigate('/add-student');
+        navigate('/new-student');
     }
   const {
     data: studentsList = [],
