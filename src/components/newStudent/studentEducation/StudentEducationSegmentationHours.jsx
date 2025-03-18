@@ -31,15 +31,7 @@ export const StudentEducationSegmentationHours = () => {
     <div className="div-utef">
       <>
         {fields.map((field, index) => {
-          return field.name === "approvedForAYear" ? (
-            <div
-              className="unique-div"
-              style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
-            >
-              <label>{field.placeholder}</label>
-              <input type={field.type} />
-            </div>
-          ) : field.name === "segmentationCode" ? (
+          return field.name === "segmentationCode" ? (
             <div
               className="unique-div"
               style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
@@ -61,13 +53,13 @@ export const StudentEducationSegmentationHours = () => {
               ))}
             </select>
           ) : (
-            <input
-              className="unique-input"
-              key={index}
-              type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
-            />
+            <div
+              className="unique-div"
+              style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+            >
+              <label>{field.placeholder}</label>
+              <input className="unique-input2" type={field.type} />
+            </div>
           );
         })}
       </>

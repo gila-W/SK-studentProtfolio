@@ -3,7 +3,6 @@ import "./Audiology.css";
 import { useNavigate } from "react-router-dom";
 
 export const Audiology = () => {
-
   const navigate = useNavigate();
 
   const handleFileChange = (event) => {
@@ -121,24 +120,14 @@ export const Audiology = () => {
             height: "7vh",
             alignItems: "center",
             margin: "1.1%",
-          }; 
+          };
 
           if (field.name === "qualifyingHearingTest") {
             return (
               <div key={index} className="unique-div" style={divStyle}>
                 <label>{field.placeholder}</label>
-                <div
-                  className="unique-div date-input-container"
-                  style={{ width: "10vw" }}
-                >
-                  <input type="date" className="date-input" />
-                </div>
-                <div
-                  className="unique-div date-input-container"
-                  style={{ width: "10vw" }}
-                >
-                  <input type="date" className="date-input" />
-                </div>
+                <input type="date" className="date-input-container" />
+                <input type="date" className="date-input-container" />
               </div>
             );
           }

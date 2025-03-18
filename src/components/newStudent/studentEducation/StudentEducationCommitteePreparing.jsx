@@ -1,7 +1,9 @@
 import React from "react";
 import "./StudentEducation.css";
 
-export const StudentEducationCommitteePreparing = () => {
+export const StudentEducationCommitteePreparing = (props) => {
+    const setObject = props.object;
+
   const fields = [
     { name: "committeeDate", placeholder: "תאריך ועדה", type: "date" },
     {
@@ -20,23 +22,23 @@ export const StudentEducationCommitteePreparing = () => {
   return (
     <div className="div-utef">
       {fields.map((field, index) => {
-        return field.name === "committeeDate" ||
-          field.name === "disabilitySeverityFormDate" ? (
+        return (
           <div
             className="unique-div"
             style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
           >
             <label>{field.placeholder}</label>
-            <input type={field.type} className="date-input" />{" "}
+            <input
+              className="unique-input2"
+              type={field.type}
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  [field.name]: e.target.value,
+                }))
+              }
+            />
           </div>
-        ) : (
-          <input
-            className="unique-input"
-            key={index}
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
-          />
         );
       })}
     </div>

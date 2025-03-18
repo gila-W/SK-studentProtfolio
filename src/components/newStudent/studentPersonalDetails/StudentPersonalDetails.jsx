@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./StudentPersonalDetails.css";
 
-export const StudentPersonalDetails = () => {
+export const StudentPersonalDetails = (props) => {
+  const setObject = props.object;
+
   const fields = [
     { name: "firstName", placeholder: "שם פרטי", type: "text" },
     { name: "lastName", placeholder: "שם משפחה", type: "text" },
@@ -26,48 +28,50 @@ export const StudentPersonalDetails = () => {
 
   return (
     <div className="div-utef">
-      <>
-        {fields.map((field, index) => {
-          return field.name === "dateOfBirth" ? (
-            <div
-              className="unique-div"
-              style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
-            >
-              <label>{field.placeholder}</label>
-              <input type={field.type} className="date-input" />{" "}
-            </div>
-          ) : field.name === "healthFund" ? (
-            <select className="unique-select" name={`${field.name}-right`}>
-              <option value="" disabled selected>
-                {field.placeholder}
+      {fields.map((field, index) => {
+        return field.name === "healthFund" ? (
+          <select
+            className="unique-select"
+            key={index}
+            onChange={(e) =>
+              setObject((prevState) => ({
+                ...prevState,
+                [field.name]: e.target.value,
+              }))
+            }
+          >
+            <option value="" disabled selected>
+              {field.placeholder}
+            </option>
+            {healthFund.map((option, optionIndex) => (
+              <option key={optionIndex} value={option}>
+                {option}
               </option>
-              {healthFund.map((option, optionIndex) => (
-                <option key={optionIndex} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          ) : field.name === "allowance" || field.name === "newspaper" ? (
-           
-            <div
-              className="unique-div"
-              style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
-            >
-              <label>{field.placeholder}</label>
-              <input type={field.type} />
-            </div>
-          ) : (
+            ))}
+          </select>
+        ) : (
+          <div
+            key={index}
+            className="unique-div"
+            style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+          >
+            <label>{field.placeholder}</label>
             <input
-              className="unique-input"
-              key={index}
+              className="unique-input2"
               type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  [field.name]:
+                    field.type === "checkbox"
+                      ? e.target.checked
+                      : e.target.value,
+                }))
+              }
             />
-          );
-        })}
-      </>
-
+          </div>
+        );
+      })}
     </div>
   );
 };

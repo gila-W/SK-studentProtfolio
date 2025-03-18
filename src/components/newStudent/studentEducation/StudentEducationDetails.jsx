@@ -1,7 +1,7 @@
 import React from "react";
 import "./StudentEducation.css";
 
-export const StudentEducationDetails = () => {
+export const StudentEducationDetails = (props) => {
   const fields = [
     { name: "institutionType", placeholder: "סוג המסגרת", type: "text" },
     { name: "institutionName", placeholder: "שם המוסד", type: "text" },
@@ -28,6 +28,7 @@ export const StudentEducationDetails = () => {
     ],
     educationStatus: ["מוכש'ר", "פטור", "תרבותי יחודי", "ממ'ח"],
   };
+  const setObject = props.object;
 
   return (
     <div className="div-utef">
@@ -35,7 +36,15 @@ export const StudentEducationDetails = () => {
         return field.name === "educationStatus" ||
           field.name === "educationType" ||
           field.name === "institutionType" ? (
-          <select className="unique-select" name={`${field.name}-right`}>
+          <select
+            className="unique-select"
+            onChange={(e) =>
+              setObject((prevState) => ({
+                ...prevState,
+                [field.name]: e.target.value,
+              }))
+            }
+          >
             <option value="" disabled selected>
               {field.placeholder}
             </option>
@@ -46,13 +55,25 @@ export const StudentEducationDetails = () => {
             ))}
           </select>
         ) : (
-          <input
-            className="unique-input"
-            key={index}
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
-          />
+          <div
+            className="unique-div"
+            style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+          >
+            <label>{field.placeholder}</label>
+            <input
+              className="unique-input2"
+              type={field.type}
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  [field.name]:
+                    field.type === "checkbox"
+                      ? e.target.checked
+                      : e.target.value,
+                }))
+              }
+            />
+          </div>
         );
       })}
     </div>
