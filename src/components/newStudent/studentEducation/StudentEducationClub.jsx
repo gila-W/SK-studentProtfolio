@@ -2,7 +2,9 @@ import React from "react";
 import "./StudentEducation.css";
 import CalendarCheckbox from "./CalendarCheckbox";
 
-export const StudentEducationClub = () => {
+export const StudentEducationClub = (props) => {
+  const setObject = props.object;
+
   const fields = [
     { name: "clubMember", placeholder: "משתתף במועדונית?", type: "checkbox" },
     { name: "theCommittee", placeholder: "הועדה מתאריך", type: "text" },
@@ -16,35 +18,54 @@ export const StudentEducationClub = () => {
   ];
   const paymentType = ["הוראת קבע", "מזומן", "צ'ק"];
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setObject((prevState) => ({
+      ...prevState,
+      clubInvoicesURL: file,
+    }));
   };
 
   return (
     <div className="div-utef">
       {fields.map((field, index) => {
-        return field.name === "clubMember" ||
-          field.name === "private" ||
-          field.name === "leavingDate" ||
-          field.name === "startDate" ? (
+        return field.name === "theCommittee" ? (
           <div
             className="unique-div"
             style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
           >
             <label>{field.placeholder}</label>
-            <input type={field.type} className="date-input" />{" "}
-          </div>
-        ) : field.name === "theCommittee" ? (
-          <div
-            className="unique-div"
-            style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
-          >
-            <label>{field.placeholder}</label>
-            <input type="checkbox" className="date-input" />
-            <input type="date" className="date-input" />
+            <input
+              type="checkbox"
+              className="date-input"
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  theCommittee: e.target.checked,
+                }))
+              }
+            />
+            <input
+              type="date"
+              className="date-input"
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  theCommitteeDate: e.target.value,
+                }))
+              }
+            />
           </div>
         ) : field.name === "paymentType" ? (
-          <select className="unique-select" name={`${field.name}-right`}>
+          <select
+            className="unique-select"
+            onChange={(e) =>
+              setObject((prevState) => ({
+                ...prevState,
+                [field.name]: e.target.value,
+              }))
+            }
+          >
             <option value="" disabled selected>
               {field.placeholder}
             </option>
@@ -63,13 +84,22 @@ export const StudentEducationClub = () => {
             <input type="file" onChange={handleFileChange} />
           </div>
         ) : (
-          <input
-            className="unique-input"
-            key={index}
-            type={field.type}
-            name={field.name}
-            placeholder={field.placeholder}
-          />
+          <div
+            className="unique-div"
+            style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
+          >
+            <label>{field.placeholder}</label>
+            <input
+              className="unique-input2"
+              type={field.type}
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  [field.name]: e.target.value,
+                }))
+              }
+            />
+          </div>
         );
       })}
       <CalendarCheckbox />
