@@ -40,12 +40,12 @@ export const Accessbility = () => {
   };
 
   return (
-    <div className="div-utef">
+    <div className="div-utef2">
       {sections.map((section) => (
         <div
           key={section.id}
           style={{
-            alignContent: "center",
+            // alignContent: "center",
             flexDirection: "column",
             marginBottom: "30px",
           }}
