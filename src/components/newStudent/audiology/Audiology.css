@@ -1,19 +1,17 @@
-/* .date-input {
-    border: none !important; 
-    outline: none !important; 
-} */
-.div-utef{
-    direction: rtl;
-}
+.div-utef {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
 .unique-select{
     border: none; 
     outline: none ;
 }
 .unique-div label {
-    margin-right: 10px; /* או כל ערך אחר שתרצי */
+    margin-right: 10px; 
 }
 .unique-div input {
-    margin-right: 10px; /* או כל ערך אחר שתרצי */
+    margin-right: 10px; 
 }
 
 .date-input-container { 
