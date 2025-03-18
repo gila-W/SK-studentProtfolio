@@ -1,54 +1,82 @@
 import React, { useState } from "react";
 import "../audiology/Audiology.css";
 
-
 export const Accessbility = () => {
-  const [sections, setSections] = useState([{ id: Date.now(), isClassAccessible: false }]);
+  const [sections, setSections] = useState([
+    { id: Date.now(), isAccessible: false, institutionName: "" },
+  ]);
 
   const fields = [
     { label: "הנגשה בתאריך", type: "date" },
+    { label: "סיור חוזר", type: "checkbox" },
+    { label: "כיתה מונגשת במוסד", type: "checkbox" },
   ];
 
   const addSection = (e) => {
     e.preventDefault();
-    setSections([...sections, { id: Date.now(), isClassAccessible: false }]);
+    setSections([
+      ...sections,
+      { id: Date.now(), isAccessible: false, institutionName: "" },
+    ]);
   };
 
-  const handleCheckboxChange = (id, fieldType) => {
-    if (fieldType === "classAccessible") {
-      setSections(sections.map(section => section.id === id ? { ...section, isClassAccessible: !section.isClassAccessible } : section));
-    }
+  const handleCheckboxChange = (id, label) => {
+    if (label === "כיתה מונגשת במוסד")
+      setSections(
+        sections.map((section) =>
+          section.id === id
+            ? { ...section, isAccessible: !section.isAccessible }
+            : section
+        )
+      );
+  };
+
+  const handleInstitutionNameChange = (id, value) => {
+    setSections(
+      sections.map((section) =>
+        section.id === id ? { ...section, institutionName: value } : section
+      )
+    );
   };
 
   return (
     <div className="div-utef">
       {sections.map((section) => (
-        <div key={section.id} className="unique-div" style={{ display: "flex", flexDirection: "column", direction: "rtl", marginBottom: "20px" }}>
-          {fields.map((field, index) => {
-            if (field.type === "date") {
-              return (
-                <div key={index}>
-                  <label>{field.label}</label>
-                  <input type="date" className="date-input" />
-                </div>
-              );
-            }
-            return null;
-          })}
-        </div>
-      ))}
-      {sections.map((section) => (
-        <div key={section.id} className="unique-div" style={{ marginTop: "10px" }}>
-          <label>סיור חוזר</label>
-          <input type="checkbox" />
-        </div>
-      ))}
-      {sections.map((section) => (
-        <div key={section.id} className="unique-div" style={{ marginTop: "10px" }}>
-          <label>כיתה מונגשת במוסד</label>
-          <input type="checkbox" checked={section.isClassAccessible} onChange={() => handleCheckboxChange(section.id, "classAccessible")} />
-          {section.isClassAccessible && (
-            <input className="unique-input" type="text" placeholder="שם המוסד" style={{ marginTop: "10px",width:"100px" }} />
+        <div
+          key={section.id}
+          style={{
+            alignContent: "center",
+            flexDirection: "column",
+            marginBottom: "30px",
+          }}
+        >
+          {fields.map((field, index) => (
+            <div
+              key={index}
+              className="unique-div"
+            >
+              <label>{field.label}</label>
+              {field.type === "date" ? (
+                <input type="date" className="date-input" />
+              ) : field.type === "checkbox" ? (
+                <input
+                  type="checkbox"
+                  onChange={() => handleCheckboxChange(section.id, field.label)}
+                />
+              ) : null}
+            </div>
+          ))}
+          {section.isAccessible && (
+            <div className="unique-div" style={{ marginTop: "10px" }}>
+              <label>שם המוסד:</label>
+              <input
+                type="text"
+                value={section.institutionName}
+                onChange={(e) =>
+                  handleInstitutionNameChange(section.id, e.target.value)
+                }
+              />
+            </div>
           )}
         </div>
       ))}
@@ -56,27 +84,3 @@ export const Accessbility = () => {
     </div>
   );
 };
-
-
-
-
-// import React from 'react'
-// import './Accessbility.css'
-// export const Accessbility=() =>{
-//     const fields = [
-//         { name: "email", placeholder: "Email", type: "text" },
-//         { name: "accessedOn", placeholder: "הנגשה בתאריך", type: "date" },
-//         { name: "accessedOn", placeholder: "סיור חוזר", type: "date" },
-//         { name: "accessedOn", placeholder: "כיתה מונגשת במוסד", type: "date" },
-//       ];
-    
-//       return (
-//         <>
-//           {fields.map((field, index) => (
-//             <input key={index} type={field.type} name={field.name} placeholder={field.placeholder} />
-//           ))}
-//           <div className="unique-div">סיור חוזר<input type="checkbox" /></div>
-//      <div className="unique-div">כיתה מונגשת במוסד<input type="checkbox" /></div>
-//         </>
-//       );
-// }
