@@ -1,4 +1,7 @@
 .div-utef {
+   direction: rtl;
+  }
+ .div-utef2{
     display: flex;
     flex-direction: column;
     align-items: center; 
@@ -13,11 +16,13 @@
 .unique-div input {
     margin-right: 10px; 
 }
-
+.unique-div{
+    direction: rtl;
+}
 .date-input-container { 
-    height: 25px; /* שינוי הגובה */
-    display: flex; /* להבטיח שהאינפוט יתיישר בצורה נכונה */
-    align-items: center; /* למרכז את התוכן בתוך הדיב */
+    height: 25px; 
+    display: flex; 
+    align-items: center; 
     size: 10px;
 }
 
@@ -27,4 +32,7 @@
 }
 .left-right-table{
     margin-right: 7.3vw;
+}
+.unique-input{
+    height: 49px;
 }
