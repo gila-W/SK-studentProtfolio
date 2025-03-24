@@ -1,43 +1,17 @@
 import React from "react";
 import "./Audiology.css";
-import { useNavigate } from "react-router-dom";
+import { data } from "react-router-dom";
 
-export const Audiology = () => {
-  const navigate = useNavigate();
+export const Audiology = (props) => {
+  const setObject = props.object;
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    // כאן תוכל לכתוב את הלוגיקה להעלאת הקובץ לשרת
+  const handleFileChange = (e, name) => {
+    const file = e.target.files[0];
+    setObject((prevState) => ({
+      ...prevState,
+      [name]: file,
+    }));
   };
-
-  const fields2 = [
-    {
-      name: "hearingLossType",
-      placeholder: "סוג הירידה",
-      options: ["הולכתי", "מעורב", "ת'ע", "תקין"],
-    },
-    {
-      name: "hearingLossTypeLevel",
-      placeholder: "רמת ירידה",
-      options: ["קל", "בינוני", "חמורה", "עמוקה"],
-    },
-    { name: "PermanentOrProlonged", placeholder: "קבועה או ממושכת" },
-    { name: "SRT", placeholder: "SRT" },
-    {
-      name: "associatedFactorLeft",
-      placeholder: "גורמ/ים נלוים",
-      options: ["נוזלים", "דלקות", "מחלות", "נוירופטיה"],
-    },
-    {
-      name: "hearingAidLeft",
-      placeholder: "עזר שמיעתי",
-      options: ["מכשיר", "שתל", "בהה"],
-    },
-    { name: "modifiedOn", placeholder: "הותאם בתאריך" },
-    { name: "intermidateFrequencies", placeholder: "תדירויות ביניים" },
-    { name: "highFrequencies", placeholder: "תדירויות גבוהות" },
-  ];
-
   const fields = [
     {
       name: "qualifyingHearingTest",
@@ -126,8 +100,26 @@ export const Audiology = () => {
             return (
               <div key={index} className="unique-div" style={divStyle}>
                 <label>{field.placeholder}</label>
-                <input type="date" className="date-input-container" />
-                <input type="date" className="date-input-container" />
+                <input
+                  type="date"
+                  className="date-input-container"
+                  onChange={(e) =>
+                    setObject((prevState) => ({
+                      ...prevState,
+                      qualifyingHearingTestA: e.target.value,
+                    }))
+                  }
+                />
+                <input
+                  type="date"
+                  className="date-input-container"
+                  onChange={(e) =>
+                    setObject((prevState) => ({
+                      ...prevState,
+                      qualifyingHearingTestB: e.target.value,
+                    }))
+                  }
+                />
               </div>
             );
           }
@@ -136,7 +128,16 @@ export const Audiology = () => {
             return (
               <div key={index} className="unique-div" style={divStyle}>
                 <label>{field.placeholder}</label>
-                <input type="date" className="date-input" />
+                <input
+                  type="date"
+                  className="date-input"
+                  onChange={(e) =>
+                    setObject((prevState) => ({
+                      ...prevState,
+                      [field.name]: e.target.value,
+                    }))
+                  }
+                />
               </div>
             );
           }
@@ -145,11 +146,41 @@ export const Audiology = () => {
             return (
               <div key={index} className="unique-div" style={divStyle}>
                 <label>סוג ירידת שמיעה:</label>
-                <input type="radio" name="side" value="חד צידי" />
+                <input
+                  type="radio"
+                  name="side"
+                  value="חד צידי"
+                  onChange={(e) =>
+                    setObject((prevState) => ({
+                      ...prevState,
+                      hearingLoss: e.target.value,
+                    }))
+                  }
+                />
                 <label>חד צידי</label>
-                <input type="radio" name="side" value="דו צידי" />
+                <input
+                  type="radio"
+                  name="side"
+                  value="דו צידי"
+                  onChange={(e) =>
+                    setObject((prevState) => ({
+                      ...prevState,
+                      hearingLoss: e.target.value,
+                    }))
+                  }
+                />
                 <label>דו צידי</label>
-                <input type="radio" name="side" value="אחר" />
+                <input
+                  type="radio"
+                  name="side"
+                  value="אחר"
+                  onChange={(e) =>
+                    setObject((prevState) => ({
+                      ...prevState,
+                      hearingLoss: e.target.value,
+                    }))
+                  }
+                />
                 <label>אחר</label>
               </div>
             );
@@ -159,7 +190,10 @@ export const Audiology = () => {
             return (
               <div key={index} className="unique-div" style={divStyle}>
                 <label>{field.placeholder}</label>
-                <input type="file" onChange={handleFileChange} />
+                <input
+                  type="file"
+                  onChange={(e) => handleFileChange(e, field.name)}
+                />
               </div>
             );
           }
@@ -167,7 +201,7 @@ export const Audiology = () => {
           return null;
         })}
       </div>
-      <div style={{ margin: "20px 0" }}></div> {/* רווח בין הדיבים לטבלה */}
+      <div style={{ margin: "20px 0" }}></div>
       <table className="left-right-table">
         <thead>
           <tr>
@@ -185,6 +219,12 @@ export const Audiology = () => {
                       <select
                         className="unique-select"
                         name={`${field.name}-right`}
+                        onChange={(e) =>
+                          setObject((prevState) => ({
+                            ...prevState,
+                            [`${field.name}Right`]: e.target.value,
+                          }))
+                        }
                       >
                         <option value="" disabled selected>
                           {field.placeholder}
@@ -195,12 +235,32 @@ export const Audiology = () => {
                           </option>
                         ))}
                       </select>
+                    ) : field.name === "modifiedOn" ? (
+                      <div className="unique-div">
+                        <label>{field.placeholder}</label>
+                        <input
+                          className="unique-input2"
+                          type="date"
+                          onChange={(e) =>
+                            setObject((prevState) => ({
+                              ...prevState,
+                              [`${field.name}Right`]: e.target.value,
+                            }))
+                          }
+                        />
+                      </div>
                     ) : (
                       <input
                         className="unique-input"
                         type="text"
                         name={`${field.name}-right`}
                         placeholder={field.placeholder}
+                        onChange={(e) =>
+                          setObject((prevState) => ({
+                            ...prevState,
+                            [`${field.name}Right`]: e.target.value,
+                          }))
+                        }
                       />
                     )}
                   </td>
@@ -209,6 +269,12 @@ export const Audiology = () => {
                       <select
                         className="unique-select"
                         name={`${field.name}-left`}
+                        onChange={(e) =>
+                          setObject((prevState) => ({
+                            ...prevState,
+                            [`${field.name}Left`]: e.target.value,
+                          }))
+                        }
                       >
                         <option value="" disabled selected>
                           {field.placeholder}
@@ -219,12 +285,32 @@ export const Audiology = () => {
                           </option>
                         ))}
                       </select>
+                    ): field.name === "modifiedOn" ? (
+                      <div className="unique-div">
+                        <label>{field.placeholder}</label>
+                        <input
+                          className="unique-input2"
+                          type="date"
+                          onChange={(e) =>
+                            setObject((prevState) => ({
+                              ...prevState,
+                              [`${field.name}Left`]: e.target.value,
+                            }))
+                          }
+                        />
+                      </div>
                     ) : (
                       <input
                         className="unique-input"
                         type="text"
                         name={`${field.name}-left`}
                         placeholder={field.placeholder}
+                        onChange={(e) =>
+                          setObject((prevState) => ({
+                            ...prevState,
+                            [`${field.name}Left`]: e.target.value,
+                          }))
+                        }
                       />
                     )}
                   </td>
@@ -236,7 +322,6 @@ export const Audiology = () => {
         </tbody>
       </table>
       <div style={{ margin: "20px 0" }}></div>{" "}
-      {/* רווח בין הטבלה לדיבים האחרים */}
       <div className="last-fields">
         {fields.slice(13).map((field, index) => {
           return field.name === "isHearingLossInFamily" ? (
@@ -250,7 +335,15 @@ export const Audiology = () => {
               }}
             >
               <label>{field.placeholder}</label>
-              <input type={field.type} />
+              <input
+                type={field.type}
+                onChange={(e) =>
+                  setObject((prevState) => ({
+                    ...prevState,
+                    isHearingLossInFamily: e.target.checked,
+                  }))
+                }
+              />
             </div>
           ) : field.name === "AAGReferralURL" ? (
             <div
@@ -263,7 +356,10 @@ export const Audiology = () => {
               }}
             >
               <label>{field.placeholder}</label>
-              <input type={field.type} onChange={handleFileChange} />
+              <input
+                type={field.type}
+                onChange={(e) => handleFileChange(e, field.name)}
+              />
             </div>
           ) : field.name === "futureDateCommitee" ||
             field.name === "lastDateCommittee" ? (
@@ -278,7 +374,16 @@ export const Audiology = () => {
             >
               {" "}
               <label>{field.placeholder}</label>
-              <input type="date" className="date-input" />
+              <input
+                type="date"
+                className="date-input"
+                onChange={(e) =>
+                  setObject((prevState) => ({
+                    ...prevState,
+                    [field.name]: e.target.value,
+                  }))
+                }
+              />
             </div>
           ) : (
             <input
@@ -287,7 +392,16 @@ export const Audiology = () => {
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
-              style={{ margin: "1.1%" }} // שווה לרוחב של הדיבים הקודמים
+              style={{ margin: "1.1%" }}
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  [field.name]:
+                    field.type === "checkbox"
+                      ? e.target.checked
+                      : e.target.value,
+                }))
+              }
             />
           );
         })}

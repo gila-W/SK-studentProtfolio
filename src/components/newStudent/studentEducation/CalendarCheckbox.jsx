@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./CalendarCheckbox.css";
 
-const CalendarCheckbox = () => {
+const CalendarCheckbox = (props) => {
+  const setObject=props.setObject;
   const months = [
     "ינואר",
     "פברואר",
@@ -20,11 +21,21 @@ const CalendarCheckbox = () => {
   const [checkedMonths, setCheckedMonths] = useState(
     Array(months.length).fill(false)
   );
-
+ 
   const handleCheckboxChange = (index) => {
-    const newCheckedMonths = [...checkedMonths];
-    newCheckedMonths[index] = !newCheckedMonths[index];
-    setCheckedMonths(newCheckedMonths);
+    setCheckedMonths((prevCheckedMonths) => {
+      const newCheckedMonths = [...prevCheckedMonths];
+      newCheckedMonths[index] = !newCheckedMonths[index];
+  
+      // עדכון ה-state של studentEducationClub
+      setObject((prevState) => {
+        const newCalendar = [...prevState.calendar];
+        newCalendar[index] = newCheckedMonths[index]; // עדכון הערך המתאים
+        return { ...prevState, calendar: newCalendar };
+      });
+  
+      return newCheckedMonths;
+    });
   };
 
   return (
