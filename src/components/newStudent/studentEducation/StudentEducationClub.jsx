@@ -4,7 +4,6 @@ import CalendarCheckbox from "./CalendarCheckbox";
 
 export const StudentEducationClub = (props) => {
   const setObject = props.object;
-
   const fields = [
     { name: "clubMember", placeholder: "משתתף במועדונית?", type: "checkbox" },
     { name: "theCommittee", placeholder: "הועדה מתאריך", type: "text" },
@@ -102,7 +101,7 @@ export const StudentEducationClub = (props) => {
           </div>
         );
       })}
-      <CalendarCheckbox />
+      <CalendarCheckbox setObject={setObject}/>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import "./StudentEducation.css";
 import "../newStudentProgressBar/NewStudentProgressBar.css";
 
-export const StudentEducationSegmentationHours = () => {
+export const StudentEducationSegmentationHours = (props) => {
   const fields = [
     { name: "hearingLevel", placeholder: "רמת שמיעה", type: "text" },
     { name: "committeeDecision", placeholder: "החלטת ועדה", type: "text" },
@@ -26,6 +26,7 @@ export const StudentEducationSegmentationHours = () => {
     "ממתין לעידכון",
     "אושר",
   ];
+  const setObject = props.object;
 
   return (
     <div className="div-utef">
@@ -37,12 +38,47 @@ export const StudentEducationSegmentationHours = () => {
               style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
             >
               <label>{field.placeholder}</label>
-              <input className="code-input" type={field.type} />
-              <input className="code-input" type={field.type} />
-              <input className="code-input" type={field.type} />
+              <input
+                className="code-input"
+                type={field.type}
+                onChange={(e) =>
+                  setObject((prevState) => ({
+                    ...prevState,
+                    segmentationCodeA: e.target.value,
+                  }))
+                }
+              />
+              <input
+                className="code-input"
+                type={field.type}
+                onChange={(e) =>
+                  setObject((prevState) => ({
+                    ...prevState,
+                    segmentationCodeB: e.target.value,
+                  }))
+                }
+              />
+              <input
+                className="code-input"
+                type={field.type}
+                onChange={(e) =>
+                  setObject((prevState) => ({
+                    ...prevState,
+                    segmentationCodeC: e.target.value,
+                  }))
+                }
+              />
             </div>
           ) : field.name === "segmentationStatus" ? (
-            <select className="unique-select" name={`${field.name}-right`}>
+            <select
+              className="unique-select"
+              onChange={(e) =>
+                setObject((prevState) => ({
+                  ...prevState,
+                  [field.name]: e.target.value,
+                }))
+              }
+            >
               <option value="" disabled selected>
                 {field.placeholder}
               </option>
@@ -58,7 +94,12 @@ export const StudentEducationSegmentationHours = () => {
               style={{ display: "inline-flex", direction: "rtl", gap: "30px" }}
             >
               <label>{field.placeholder}</label>
-              <input className="unique-input2" type={field.type} />
+              <input className="unique-input2" type={field.type} onChange={(e) =>
+              setObject((prevState) => ({
+                ...prevState,
+                [field.name]: e.target.value,
+              }))
+            }/>
             </div>
           );
         })}
